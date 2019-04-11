@@ -1,8 +1,8 @@
-# WalkingbBreak plugin for DemonBuddy
+# WalkingBreak plugin for DemonBuddy
 
 ![](images/semaphore.jpg)
 
-**WalkingbBreak** is a plugin for **DemonBuddy** (a bot for **Diablo III** videogame),
+**WalkingBreak** is a plugin for **DemonBuddy** (a bot for **Diablo III** videogame),
 on which you can use this plugin to specify a keyboard key or mouse button to pause/resume the bot and let you walk free this way.
 
 ------------------------
