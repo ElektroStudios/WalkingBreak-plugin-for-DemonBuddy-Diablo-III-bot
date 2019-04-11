@@ -1,0 +1,1 @@
+# WalkingbBreak plugin for DemonBuddy
