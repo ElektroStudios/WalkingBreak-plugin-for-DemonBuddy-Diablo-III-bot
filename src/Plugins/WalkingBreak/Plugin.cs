@@ -1,6 +1,6 @@
 ﻿// ***********************************************************************
 // Author   : ElektroStudios
-// Modified : 10-April-2019
+// Modified : 13-April-2019
 // ***********************************************************************
 
 #region  Usings 
@@ -21,8 +21,8 @@ using System.Windows.Markup;
 using log4net;
 
 using Zeta.Bot;
-using Zeta.Common.Plugins;
 using Zeta.Common;
+using Zeta.Common.Plugins;
 
 using WalkingBreak.Win32;
 
@@ -38,6 +38,17 @@ namespace WalkingBreak {
     /// </remarks>
     /// ----------------------------------------------------------------------------------------------------
     public sealed class Plugin : IPlugin {
+
+#region  Public Fields 
+
+        /// ----------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// The virtual key used to pause the bot.
+        /// </summary>
+        /// ----------------------------------------------------------------------------------------------------
+        public static VirtualKeys key = VirtualKeys.MouseButtonMiddle;
+
+#endregion
 
 #region  Private Fields 
 
@@ -57,10 +68,10 @@ namespace WalkingBreak {
 
         /// ----------------------------------------------------------------------------------------------------
         /// <summary>
-        /// The virtual key used to pause the bot.
+        /// Flag to determine whether or not the plugin is enabled.
         /// </summary>
         /// ----------------------------------------------------------------------------------------------------
-        public static VirtualKeys key = VirtualKeys.MouseButtonMiddle;
+        private bool isPluginEnabled = false;
 
 #endregion
 
@@ -95,7 +106,7 @@ namespace WalkingBreak {
         /// ----------------------------------------------------------------------------------------------------
         public Version Version {
             get {
-                return new Version(1, 0);
+                return new Version(1, 1);
             }
         }
 
@@ -150,9 +161,11 @@ namespace WalkingBreak {
         /// </summary>
         /// ----------------------------------------------------------------------------------------------------
         void IPlugin.OnPulse() {
-            bool PauseRequested = this.PauseRequested();
-            if ((PauseRequested && !BotMain.IsPaused)) {
-                BotMain.PauseWhile(() => this.PauseRequested());
+            if (this.isPluginEnabled) {
+                bool PauseRequested = this.PauseRequested();
+                if ((PauseRequested && !BotMain.IsPaused)) {
+                    BotMain.PauseWhile(() => this.PauseRequested());
+                }            
             }
         }
 
@@ -163,6 +176,7 @@ namespace WalkingBreak {
         /// ----------------------------------------------------------------------------------------------------
         void IPlugin.OnEnabled() {
             Plugin.key = Plugin.Deserialize();
+            this.isPluginEnabled = true;
             this.log.Info("[Walking Break] Plugin enabled.");
         }
 
@@ -173,6 +187,7 @@ namespace WalkingBreak {
         /// ----------------------------------------------------------------------------------------------------
         void IPlugin.OnDisabled() {
             this.isBotPaused = false;
+            this.isPluginEnabled = false;
             this.log.Info("[Walking Break] Plugin disabled.");
         }
 
@@ -183,6 +198,7 @@ namespace WalkingBreak {
         /// ----------------------------------------------------------------------------------------------------
         void IPlugin.OnShutdown() {
             this.isBotPaused = false;
+            this.isPluginEnabled = false;
         }
 
 #endregion
