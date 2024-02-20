@@ -1,4 +1,4 @@
-> ‼️ This project is discontinued and archived.
+# ‼️ This project is discontinued and archived.
 
 # WalkingBreak plugin for [DemonBuddy](https://web.archive.org/web/20190103125817/https://www.demonbuddy.com/)
 
