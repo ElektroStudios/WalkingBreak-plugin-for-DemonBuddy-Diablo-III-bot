@@ -24,7 +24,7 @@ This Work (the repository and the content provided in) is provided "as is", with
 
 ## 💪 Contributing
 
-This project is discontinued and archived, sice the bot DemonBuddy is dead.
+This project is discontinued and archived, since the bot DemonBuddy is dead.
 
 ## 💰 Beyond Contribution 
 
